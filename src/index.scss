@@ -1,0 +1,159 @@
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url(/bg.png);
+  background-size: cover;
+  background-position: center;
+  .sidebar {
+    width: 56px;
+    height: 100%;
+    background: rgb(59 59 59 / 54%);
+    box-shadow: 1px 0 4px 0px;
+  }
+}
+.container {
+  color: #f1f1f1;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  .playersContainer {
+    width: 615px;
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    .playerItem {
+      width: 70px;
+      height: 110px;
+      display: flex;
+      margin: 8px;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 6px;
+      }
+      .name {
+        color: #f1f1f1;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+  .bottom {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    .chatContainer {
+      height: 100%;
+      width: 65%;
+      background-color: #2b262277;
+      display: flex;
+      flex-direction: column;
+      .messageContainer {
+        flex-grow: 1;
+        width: 100%;
+        overflow: auto;
+        .message {
+          padding-inline: 10px;
+          .time {
+            color: #b2b2b2;
+          }
+          .name {
+            color: #fa852b;
+          }
+        }
+      }
+      .sendContainer {
+        height: 30px;
+        width: 100%;
+        display: flex;
+        .input {
+          width: 93%;
+          height: 100%;
+          font: inherit;
+          color:inherit;
+          background-color: inherit;
+          box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+          border: 0;
+          outline: 0;
+          padding: 5px 14px;
+        }
+        .send{
+          padding: 1px 10px;
+          font-size: 14px;
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .launchContainer {
+      height: 100%;
+      width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .launch{
+        width: 66%;
+        height: 42%;
+        font-size: 31px;
+      }
+    }
+  }
+}
+
+div {
+  font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+img {
+  object-fit: contain;
+}
+
+.button {
+  background-color: #e17726;
+  appearance: none;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #fa852b;
+}
+.button:active {
+  background-color: #cc6c22;
+  box-shadow: rgba(188, 82, 7, 0.2) 0 1px 0 inset;
+}

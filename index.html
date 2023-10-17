@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS-Client</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        user-select: none;
+      }
+      .titleBar {
+        width: 100%;
+        height: 28px;
+        background-color: #202124;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .titleButton {
+        padding: 4px;
+      }
+      .minimize:hover {
+        background-color: #37383a;
+      }
+      .close:hover {
+        background-color: #e81123;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        margin: 1px;
+        background: #ffffff00;
+        /* border-radius: 6px; */
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #717171a5;
+        border-radius: 6px;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-tauri-drag-region class="titleBar">
+      <div style="margin-left: 10px; color: #dadada;pointer-events: none;">CS对转平台</div>
+      <div
+        style="
+          height: 100%;
+          display: flex;
+          align-items: center;
+        ">
+        <svg
+          id="minimize"
+          width="40"
+          height="100%"
+          viewBox="0 0 1024 1024"
+          class="titleButton minimize">
+          <path d="M928 425.6v144H96v-144z" fill="#aaa"></path>
+        </svg>
+        <svg
+          id="close"
+          width="40"
+          height="100%"
+          viewBox="0 0 1024 1024"
+          class="titleButton close">
+          <path
+            d="M548.992 503.744L885.44 167.328a31.968 31.968 0 1 0-45.248-45.248L503.744 458.496 167.328 122.08a31.968 31.968 0 1 0-45.248 45.248l336.416 336.416L122.08 840.16a31.968 31.968 0 1 0 45.248 45.248l336.416-336.416L840.16 885.44a31.968 31.968 0 1 0 45.248-45.248L548.992 503.744z"
+            fill="#aaa" />
+        </svg>
+      </div>
+    </div>
+    <div id="root" style="flex-grow: 1; width: 100%"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
