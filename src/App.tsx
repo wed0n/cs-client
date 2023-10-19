@@ -1,3 +1,4 @@
+import { useTransition } from '@react-spring/web'
 import { appWindow } from '@tauri-apps/api/window'
 import ChatMessage from 'component/ChatMessage'
 import PlayerItem from 'component/Player'
@@ -8,6 +9,14 @@ import { chatMessage, player } from './interfaces'
 export default function App() {
   const [players, setPlayers] = useState<player[]>([])
   const [chatMessages, setChatMessages] = useState<chatMessage[]>([])
+  const transitions = useTransition(players, {
+    from: { opacity: 0, transform: 'translateX(+60%)' },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: { opacity: 0, transform: 'translateX(-60%)' },
+    config: { duration: 750 },
+    unique: true,
+    keys: (item) => item.personaname,
+  })
   useEffect(() => {
     document
       .getElementById('minimize')
@@ -15,14 +24,27 @@ export default function App() {
     document
       .getElementById('close')
       ?.addEventListener('click', () => appWindow.close())
-  })
+    const websocket = new WebSocket('wss:///?steamid=')
+    websocket.onmessage = (event) => {
+      console.log(event.data)
+      const result = JSON.parse(event.data)
+      setPlayers(result.data)
+    }
+    websocket.onclose = () => {
+      setPlayers([])
+    }
+    return () => {
+      setPlayers([])
+    }
+  }, [])
+
   return (
     <div className="main">
       <div className="sidebar"></div>
       <div className="container">
         <div className="playersContainer">
-          {players.map((item) => (
-            <PlayerItem key={item.personaname} {...item} />
+          {transitions((style, item) => (
+            <PlayerItem key={item.personaname} {...item} springProps={style} />
           ))}
         </div>
         <div className="bottom">

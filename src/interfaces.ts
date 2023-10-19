@@ -1,10 +1,12 @@
+
 export interface player {
   personaname: string
   avatarhash: string
+  springProps: any
 }
 
-export interface chatMessage{
-  time:number
-  personname:string
-  content:string
+export interface chatMessage {
+  time: number
+  personname: string
+  content: string
 }
