@@ -2,21 +2,38 @@ import { useTransition } from '@react-spring/web'
 import { appWindow } from '@tauri-apps/api/window'
 import ChatMessage from 'component/ChatMessage'
 import PlayerItem from 'component/Player'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Virtuoso } from 'react-virtuoso'
 import './index.scss'
-import { chatMessage, player } from './interfaces'
+import { chatMessage, message, player } from './interfaces'
 
 export default function App() {
   const [players, setPlayers] = useState<player[]>([])
   const [chatMessages, setChatMessages] = useState<chatMessage[]>([])
+  const [inputContent, setInputContent] = useState('')
+
+  const websocketRef = useRef<WebSocket | null>(null)
   const transitions = useTransition(players, {
-    from: { opacity: 0, transform: 'translateX(+60%)' },
-    enter: { opacity: 1, transform: 'translateX(0%)' },
-    leave: { opacity: 0, transform: 'translateX(-60%)' },
+    from: { opacity: 0, width: 0 },
+    enter: { opacity: 1, width: 86 },
+    leave: { opacity: 0, width: 0 },
     config: { duration: 750 },
     unique: true,
-    keys: (item) => item.personaname,
+    keys: (item) => item.steamid,
   })
+
+  const sendChatMessage = () => {
+    const chatMessage: message<string> = {
+      type: 'NEW_CHAT',
+      data: inputContent,
+    }
+    const websocket = websocketRef.current
+    if (websocket) {
+      websocket.send(JSON.stringify(chatMessage))
+      setInputContent('')
+    }
+  }
+
   useEffect(() => {
     document
       .getElementById('minimize')
@@ -28,13 +45,24 @@ export default function App() {
     websocket.onmessage = (event) => {
       console.log(event.data)
       const result = JSON.parse(event.data)
-      setPlayers(result.data)
+      const type = result.type
+      switch (type) {
+        case 'REFRESH_USERS':
+          setPlayers(result.data)
+          break
+        case 'NEW_CHAT':
+          setChatMessages((prev) =>
+            [...prev, result.data].sort((a, b) => a.time - b.time)
+          )
+          break
+      }
     }
     websocket.onclose = () => {
       setPlayers([])
     }
     return () => {
       setPlayers([])
+      setChatMessages([])
     }
   }, [])
 
@@ -44,19 +72,37 @@ export default function App() {
       <div className="container">
         <div className="playersContainer">
           {transitions((style, item) => (
-            <PlayerItem key={item.personaname} {...item} springProps={style} />
+            <PlayerItem {...item} springProps={style} />
           ))}
         </div>
         <div className="bottom">
           <div className="chatContainer">
-            <div className="messageContainer">
-              {chatMessages.map((item) => (
-                <ChatMessage key={item.time} {...item} />
-              ))}
-            </div>
+            <Virtuoso
+              className="messageContainer"
+              data={chatMessages}
+              itemContent={(_index, data) => <ChatMessage {...data} />}
+              followOutput={'auto'}
+            />
             <div className="sendContainer">
-              <input className="input" />
-              <button className="send button">发送</button>
+              <input
+                className="input"
+                value={inputContent}
+                onChange={(event) => {
+                  setInputContent(event.target.value)
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    sendChatMessage()
+                  }
+                }}
+              />
+              <button
+                className="send button"
+                onClick={() => {
+                  sendChatMessage()
+                }}>
+                发送
+              </button>
             </div>
           </div>
           <div className="launchContainer">

@@ -7,7 +7,7 @@ export default function ChatMessage(props: chatMessage) {
   return (
     <div className="message">
       <span className="time">{timeResult}</span>{' '}
-      <span className="name">{props.personname}</span> : {props.content}
+      <span className="name">{props.name}</span> : {props.content}
     </div>
   )
 }

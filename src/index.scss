@@ -30,23 +30,26 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    .playerItem {
-      width: 70px;
-      height: 110px;
-      display: flex;
-      margin: 8px;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      .avatar {
+    .playerItemContainer {
+      overflow: hidden;
+      .playerItem {
         width: 70px;
-        height: 70px;
-        border-radius: 6px;
-      }
-      .name {
-        color: #f1f1f1;
-        font-size: 14px;
-        font-weight: 500;
+        height: 110px;
+        margin: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .avatar {
+          width: 70px;
+          height: 70px;
+          border-radius: 6px;
+        }
+        .name {
+          color: #f1f1f1;
+          font-size: 14px;
+          font-weight: 500;
+        }
       }
     }
   }
@@ -62,9 +65,13 @@
       flex-direction: column;
       .messageContainer {
         flex-grow: 1;
+        max-height: 80%;
         width: 100%;
         overflow: auto;
+        display: flex;
+        flex-direction: column;
         .message {
+          width: 100%;
           padding-inline: 10px;
           .time {
             color: #b2b2b2;
@@ -82,14 +89,14 @@
           width: 93%;
           height: 100%;
           font: inherit;
-          color:inherit;
+          color: inherit;
           background-color: inherit;
           box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
           border: 0;
           outline: 0;
           padding: 5px 14px;
         }
-        .send{
+        .send {
           padding: 1px 10px;
           font-size: 14px;
           flex-grow: 1;
@@ -103,7 +110,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      .launch{
+      .launch {
         width: 66%;
         height: 42%;
         font-size: 31px;
@@ -143,6 +150,10 @@ img {
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+::selection {
+  background-color: #e17726;
 }
 
 .button:focus:not(:focus-visible):not(.focus-visible) {
