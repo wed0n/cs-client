@@ -10,6 +10,9 @@ export function Chat() {
   const { sendMessage, handlers } = useContext(AppContext)
 
   const sendChatMessage = () => {
+    if (/^\s*$/.test(inputContent)) {
+      return
+    }
     if (sendMessage('NEW_CHAT', inputContent)) setInputContent('')
   }
 

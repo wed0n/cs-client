@@ -44,7 +44,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "wed0n.cs.client",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
