@@ -26,3 +26,8 @@ export interface chatMessage {
   name: string
   content: string
 }
+
+export interface launchConfig {
+  address:string,
+  csgo:boolean
+}
