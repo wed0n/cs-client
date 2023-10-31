@@ -19,6 +19,8 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.2", features = ["shell-open", "window-close", "window-hide", "window-maximize", "window-minimize", "window-show", "window-start-dragging", "window-unmaximize", "window-unminimize"] }
 tokio = { version = "1", features = ["full"] }
 steamworks = "0.10.0"
+interprocess = { version = "1.2.1",features = ["tokio_support"] }
+futures = "0.3.29"
 
 [features]
 # by default Tauri runs in production mode

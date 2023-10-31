@@ -10,11 +10,12 @@ import { appContext, launchConfig, message, serverMessage } from './interfaces'
 export const AppContext = createContext<appContext>(null as any)
 
 const serverAddress = ''
+const defaultCSAddress = ''
 
 export default function App() {
   const isSteamReady = useRef(false)
   const launchConfig = useRef<launchConfig>({
-    address: '',
+    address: defaultCSAddress,
     csgo: false,
   })
   const websocketRef = useRef<WebSocket | null>(null)
