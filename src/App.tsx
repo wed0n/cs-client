@@ -7,10 +7,10 @@ import { createContext, useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { appContext, launchConfig, message, serverMessage } from './interfaces'
 
-export const AppContext = createContext<appContext>(null as any)
-
 const serverAddress = ''
 const defaultCSAddress = ''
+
+export const AppContext = createContext<appContext>(null as any)
 
 export default function App() {
   const isSteamReady = useRef(false)
