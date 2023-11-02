@@ -38,6 +38,8 @@ export default function App() {
   const launch = async () => {
     const config = launchConfig.current
     try {
+      let audio = new Audio('/lets_go.mp3')
+      audio.play()
       if (config.csgo) {
         await invoke('launch_csgo', { target: config.address })
       } else {

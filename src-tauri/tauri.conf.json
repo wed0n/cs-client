@@ -74,6 +74,7 @@
         "fullscreen": false,
         "width": 1000,
         "height": 612,
+        "center": true,
         "resizable": false,
         "title": "CS对转平台"
       }
